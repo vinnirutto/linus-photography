@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACE BOT | LINUS® Photography</title>
+
+    <link rel="stylesheet" href="pace-bot.css">
+</head>
+
+<body>
+
+    <!-- PACE BOT LAUNCHER -->
+    <button class="pace-toggle" id="paceLauncher" aria-label="Open PACE BOT">
+        <span class="pace-lens"></span>
+    </button>
+
+    <!-- GREETING POPUP -->
+    <div class="pace-greeting" id="paceGreeting">
+        <span>Need a hand? Let's talk photography.</span>
+        <button id="paceGreetingClose" aria-label="Close greeting">&times;</button>
+    </div>
+
+
+    <!-- CHAT WINDOW -->
+    <main class="pace-window pace-chat" id="paceChat">
+
+        <!-- HEADER -->
+        <header class="pace-header">
+
+            <div class="pace-brand">
+
+                <div class="pace-avatar">
+                    <span class="pace-lens"></span>
+                </div>
+
+                <div class="pace-brand-info">
+                    <h2>PACE BOT</h2>
+                    <p>LINUS® Photography Assistant</p>
+                </div>
+
+            </div>
+
+            <div class="pace-header-actions">
+
+                <button id="paceMinimize"
+                        class="pace-minimize"
+                        aria-label="Minimize chat">
+                    −
+                </button>
+
+                <button id="paceClose"
+                        class="pace-close"
+                        aria-label="Close chat">
+                    &times;
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT MESSAGES -->
+        <section class="pace-messages" id="paceMessages">
+
+            <div class="pace-date">LINUS® PHOTOGRAPHY</div>
+
+            <div class="pace-message bot-message">
+
+                <div class="pace-message-content">
+
+                    <span class="pace-sender">PACE BOT</span>
+
+                    <div class="pace-bubble">
+                        Hey there! Welcome to LINUS® Photography.
+                        What brings you here today?
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FIRST VISIT OPTIONS -->
+            <div class="pace-choices" id="paceWelcomeChoices">
+
+                <button class="pace-choice" data-action="services">
+                    Explore photography services
+                </button>
+
+                <button class="pace-choice" data-action="packages">
+                    View packages & prices
+                </button>
+
+                <button class="pace-choice" data-action="booking">
+                    Book a photography session
+                </button>
+
+                <button class="pace-choice" data-action="availability">
+                    Check availability
+                </button>
+
+                <button class="pace-choice" data-action="custom">
+                    Ask about custom shoots
+                </button>
+
+                <button class="pace-choice" data-action="contact">
+                    Talk to the photographer
+                </button>
+
+            </div>
+
+
+            <!-- TYPING INDICATOR -->
+            <div class="pace-typing" id="paceTyping" hidden>
+                <span></span>
+                <span></span>
+                <span></span>
+                <small>PACE BOT is typing...</small>
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT SHORTCUTS -->
+        <div class="pace-contact-shortcuts" id="paceContactShortcuts" hidden>
+
+            <a href="https://wa.me/254768810218"
+               target="_blank"
+               rel="noopener">
+                WHATSAPP ↗
+            </a>
+
+            <a href="https://www.instagram.com/_linusphotography/"
+               target="_blank"
+               rel="noopener">
+                INSTAGRAM ↗
+            </a>
+
+        </div>
+
+
+        <!-- INPUT AREA -->
+        <form class="pace-input-area" id="paceForm">
+
+            <input
+                type="text"
+                id="paceInput"
+                placeholder="Ask me anything..."
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit" aria-label="Send message">
+                <span>↗</span>
+            </button>
+
+        </form>
+
+
+        <!-- FOOTER -->
+        <footer class="pace-footer">
+            <span>POWERED BY LINUS® PHOTOGRAPHY</span>
+        </footer>
+
+    </main>
+
+
+    <!-- BOT SCRIPT -->
+    <script src="bot.js"></script>
+
+</body>
+</html>

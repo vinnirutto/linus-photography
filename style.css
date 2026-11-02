@@ -1,0 +1,1586 @@
+
+/* =========================================
+   LINUS® PHOTOGRAPHY
+   HERO SECTION
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080808;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* HEADER */
+
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 105px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+
+/* LOGO */
+
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+    height: 75px;
+    flex-shrink: 0;
+}
+
+.logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+
+
+/* NAVIGATION */
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 29px;
+}
+
+.navigation a {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    color: rgba(255, 255, 255, 0.82);
+    transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+    color: #ffffff;
+}
+
+
+/* HERO */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 650px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #080808;
+}
+
+
+/* BACKGROUND VIDEO */
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+
+/* DARK OVERLAY */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.35) 55%,
+            rgba(0, 0, 0, 0.25) 100%
+        );
+
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    margin-left: 10%;
+    margin-top: 45px;
+    max-width: 750px;
+}
+
+
+.hero-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 28px;
+}
+
+
+.hero-content h1 {
+    font-size: clamp(75px, 11vw, 165px);
+    line-height: 0.82;
+    font-weight: 700;
+    letter-spacing: -9px;
+    text-transform: uppercase;
+}
+
+
+.hero-content h1 span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -8px;
+}
+
+
+.hero-description {
+    max-width: 310px;
+    margin-top: 40px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.3px;
+}
+
+
+/* HERO FOOTER */
+
+.hero-footer {
+    position: absolute;
+    bottom: 38px;
+    left: 6%;
+    right: 6%;
+    z-index: 3;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.hero-footer span,
+.hero-footer a {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+.hero-footer a {
+    transition: opacity 0.3s ease;
+}
+
+.hero-footer a:hover {
+    opacity: 0.55;
+}
+
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .site-header {
+        padding: 0 5%;
+    }
+
+    .logo {
+        width: 110px;
+    }
+
+    .navigation {
+        gap: 15px;
+    }
+
+    .navigation a {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .hero-content {
+        margin-left: 7%;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 700px) {
+
+    .site-header {
+        height: 85px;
+        padding: 0 6%;
+    }
+
+    .logo {
+        width: 105px;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .hero {
+        min-height: 600px;
+        height: 100svh;
+    }
+
+    .hero-video {
+        object-position: 58% center;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.75),
+                rgba(0, 0, 0, 0.2) 75%
+            );
+    }
+
+    .hero-content {
+        margin: 0 7%;
+        margin-top: 30px;
+    }
+
+    .hero-label {
+        font-size: 8px;
+        letter-spacing: 2.5px;
+        margin-bottom: 25px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(65px, 17vw, 105px);
+        letter-spacing: -5px;
+        line-height: 0.88;
+    }
+
+    .hero-content h1 span {
+        letter-spacing: -5px;
+    }
+
+    .hero-description {
+        margin-top: 28px;
+        font-size: 12px;
+        max-width: 260px;
+    }
+
+    .hero-footer {
+        left: 6%;
+        right: 6%;
+        bottom: 25px;
+    }
+
+    .hero-footer span {
+        display: none;
+    }
+
+    .hero-footer a {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+
+}
+
+/* =========================================
+   OUR STORY — SCROLL EXPERIENCE
+========================================= */
+
+.story-section {
+    position: relative;
+    height: 400vh;
+    background: #080808;
+}
+
+.story-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: #080808;
+}
+
+.story-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    filter: grayscale(100%) contrast(1.12);
+
+    transform: scale(1.25);
+
+    transition:
+        transform 0.25s linear,
+        opacity 0.35s ease,
+        filter 0.2s linear;
+}
+
+.story-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.82),
+            rgba(0,0,0,.18)
+        );
+}
+
+.story-content {
+    position: absolute;
+    z-index: 2;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 680px;
+}
+
+.story-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    color: rgba(255,255,255,.7);
+}
+
+.story-content h2 {
+    font-size: clamp(55px, 8vw, 115px);
+    line-height: .92;
+    letter-spacing: -5px;
+    font-weight: 700;
+}
+
+.story-content p:last-child {
+    max-width: 350px;
+    margin-top: 30px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(255,255,255,.75);
+}
+
+.story-bottom {
+    position: absolute;
+    bottom: 35px;
+    left: 6%;
+    right: 6%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.7);
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .story-content {
+        left: 7%;
+        right: 7%;
+    }
+
+    .story-content h2 {
+        letter-spacing: -3px;
+    }
+
+    .story-bottom {
+        left: 7%;
+        right: 7%;
+        font-size: 8px;
+    }
+}
+
+
+.story-section {
+    position: relative;
+    height: 400vh;
+    background: #080808;
+}
+
+.story-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+.story-image img {
+    transition:
+        transform 0.25s linear,
+        opacity 0.35s ease;
+}
+
+/* =========================================
+   GALLERY — LINUS® EDITORIAL PHOTOGRAPHY
+========================================= */
+
+.gallery-section {
+    position: relative;
+    background: #080808;
+    padding: 140px 8% 120px;
+    overflow: hidden;
+}
+
+/* GALLERY HEADING */
+
+.gallery-heading {
+    margin-bottom: 75px;
+}
+
+.gallery-heading > p,
+.gallery-heading > span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.6);
+}
+
+.gallery-heading h2 {
+    font-size: clamp(55px, 9vw, 125px);
+    line-height: .88;
+    letter-spacing: -6px;
+    margin: 35px 0;
+}
+
+.gallery-heading h2 em {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+/* PORTRAIT PHOTO ARRANGEMENT */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    row-gap: 28px;
+    align-items: start;
+}
+
+.gallery-item {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.gallery-large {
+    width: 100%;
+}
+
+.gallery-small {
+    width: 100%;
+    margin: 0;
+}
+
+/* PORTRAIT IMAGE FRAME */
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%) contrast(1.08);
+
+    transition:
+        filter .7s ease,
+        transform 1s ease;
+}
+
+.gallery-large img,
+.gallery-small img {
+    aspect-ratio: 3 / 4;
+}
+
+.gallery-item:hover img {
+    filter: grayscale(0%) contrast(1.04);
+    transform: scale(1.025);
+}
+
+/* IMAGE CAPTIONS */
+
+.gallery-item figcaption {
+    padding-top: 10px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.7);
+}
+
+/* GALLERY ENDING */
+
+.gallery-ending {
+    margin-top: 110px;
+    text-align: right;
+}
+
+.gallery-ending p {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.55);
+}
+
+.gallery-ending h3 {
+    margin-top: 20px;
+    font-size: clamp(38px, 6vw, 80px);
+    line-height: .95;
+    letter-spacing: -3px;
+}
+
+/* TABLETS */
+
+@media (max-width: 768px) {
+
+    .gallery-section {
+        padding: 100px 6%;
+    }
+
+    .gallery-heading {
+        margin-bottom: 55px;
+    }
+
+    .gallery-heading h2 {
+        letter-spacing: -3px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 12px;
+        row-gap: 20px;
+    }
+
+    .gallery-item img {
+        aspect-ratio: 3 / 4;
+    }
+
+    .gallery-item figcaption {
+        font-size: 8px;
+        letter-spacing: 1px;
+        padding-top: 8px;
+    }
+
+    .gallery-ending {
+        margin-top: 80px;
+    }
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 480px) {
+
+    .gallery-section {
+        padding: 85px 5%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 8px;
+        row-gap: 16px;
+    }
+
+    .gallery-large,
+    .gallery-small {
+        width: 100%;
+        margin: 0;
+    }
+
+    .gallery-item img {
+        aspect-ratio: 3 / 4;
+    }
+
+    .gallery-item figcaption {
+        font-size: 7px;
+        letter-spacing: .7px;
+    }
+
+    .gallery-ending {
+        margin-top: 65px;
+    }
+
+}
+
+/* =========================================
+   THE EXPERIENCE — LINUS®
+========================================= */
+
+/* =========================================
+   THE EXPERIENCE — LINUS® PHOTOGRAPHY
+========================================= */
+
+/* =========================================
+   THE EXPERIENCE — LINUS® PHOTOGRAPHY
+========================================= */
+
+.experience-section {
+    position: relative;
+    background: #080808;
+    color: #f5f5f2;
+    padding: 130px 8% 100px;
+    overflow: hidden;
+}
+
+/* INTRODUCTION */
+
+.experience-intro {
+    max-width: 900px;
+    margin-bottom: 80px;
+}
+
+.experience-eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.55);
+}
+
+.experience-intro h2 {
+    font-size: clamp(65px, 11vw, 145px);
+    line-height: .82;
+    letter-spacing: -7px;
+    margin: 38px 0;
+}
+
+.experience-intro h2 em {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+.experience-description {
+    max-width: 390px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(255,255,255,.65);
+    margin-left: 35%;
+}
+
+/* =========================================
+   VIDEO + SIDE TYPOGRAPHY
+========================================= */
+
+.experience-video-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px) minmax(0, 1fr);
+    align-items: center;
+    gap: 25px;
+}
+
+/* PORTRAIT VIDEO */
+
+.experience-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #080808;
+}
+
+.experience-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    filter: none;
+}
+
+.experience-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.55),
+        transparent 40%
+    );
+    pointer-events: none;
+}
+
+/* VIDEO CAPTION */
+
+.experience-caption {
+    position: absolute;
+    z-index: 2;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    pointer-events: none;
+}
+
+/* SIDE WORDS */
+
+.experience-side {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 45px 0;
+}
+
+.side-message span {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 15px;
+}
+
+.side-message h3 {
+    font-size: clamp(30px, 4vw, 65px);
+    line-height: .85;
+    letter-spacing: -3px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.experience-side-left {
+    text-align: left;
+}
+
+.experience-side-right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.side-signature {
+    font-size: 9px;
+    line-height: 1.8;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.45);
+}
+
+/* =========================================
+   EXPERIENCE STEPS
+========================================= */
+
+.experience-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 35px;
+    margin-top: 120px;
+}
+
+.experience-step {
+    border-top: 1px solid rgba(255,255,255,.35);
+    padding-top: 20px;
+}
+
+.step-word {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.5);
+}
+
+.experience-step h3 {
+    font-size: clamp(28px, 4vw, 48px);
+    letter-spacing: -2px;
+    margin: 28px 0 15px;
+}
+
+.experience-step p {
+    max-width: 280px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: rgba(255,255,255,.6);
+}
+
+/* ENDING */
+
+.experience-ending {
+    margin-top: 110px;
+    text-align: center;
+}
+
+.experience-ending p {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.55);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .experience-video-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 430px) minmax(0, 1fr);
+        gap: 15px;
+    }
+
+    .side-message h3 {
+        font-size: 35px;
+        letter-spacing: -2px;
+    }
+
+    .side-message span {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .experience-section {
+        padding: 100px 6% 80px;
+    }
+
+    .experience-intro h2 {
+        letter-spacing: -4px;
+    }
+
+    .experience-description {
+        margin-left: 15%;
+    }
+
+    .experience-steps {
+        gap: 20px;
+        margin-top: 85px;
+    }
+}
+
+/* =========================================
+   PHONE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .experience-video-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .experience-side {
+        height: auto;
+        padding: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .experience-side-left {
+        order: 2;
+    }
+
+    .experience-visual {
+        order: 1;
+        width: min(100%, 430px);
+        margin: auto;
+    }
+
+    .experience-side-right {
+        order: 3;
+    }
+
+    .side-message h3 {
+        font-size: 32px;
+        letter-spacing: -2px;
+    }
+
+    .side-message span {
+        font-size: 7px;
+        margin-bottom: 8px;
+    }
+
+    .side-signature {
+        font-size: 7px;
+    }
+
+    .experience-caption {
+        bottom: 12px;
+        left: 10px;
+        right: 10px;
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .experience-section {
+        padding: 85px 5% 65px;
+    }
+
+    .experience-intro {
+        margin-bottom: 55px;
+    }
+
+    .experience-intro h2 {
+        font-size: 65px;
+        letter-spacing: -3px;
+    }
+
+    .experience-description {
+        margin-left: 0;
+        font-size: 12px;
+    }
+
+    .experience-steps {
+        grid-template-columns: 1fr;
+        gap: 38px;
+        margin-top: 75px;
+    }
+
+    .experience-step h3 {
+        margin: 20px 0 10px;
+    }
+
+    .experience-ending {
+        margin-top: 75px;
+    }
+}
+
+/* ==========================================
+   LINUS® PHOTOGRAPHY — PACKAGES
+========================================== */
+
+
+/* ==========================================
+   LINUS® PHOTOGRAPHY — PACKAGES
+========================================== */
+
+.packages-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 8%;
+    overflow: hidden;
+    background: #080808;
+    color: #f5f5f5;
+}
+
+/* INTRO */
+
+.packages-intro {
+    max-width: 650px;
+    margin-bottom: 65px;
+}
+
+.packages-eyebrow {
+    margin-bottom: 22px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #999;
+}
+
+.packages-intro h2 {
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 400;
+    line-height: .9;
+    letter-spacing: -3px;
+}
+
+.packages-intro h2 em {
+    color: #999;
+    font-weight: 400;
+}
+
+.packages-description {
+    max-width: 390px;
+    margin-top: 25px;
+    color: #999;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* FOUR-CARD GRID */
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+/* GLASS CARDS */
+
+.package-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 285px;
+    padding: 27px 30px 24px;
+
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 5px;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity .7s ease,
+        transform .5s ease,
+        border-color .4s ease,
+        background .4s ease;
+}
+
+/* SCROLL REVEAL */
+
+.packages-section.is-visible .package-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.packages-section.is-visible .package-card:nth-child(1) {
+    transition-delay: .1s;
+}
+
+.packages-section.is-visible .package-card:nth-child(2) {
+    transition-delay: .22s;
+}
+
+.packages-section.is-visible .package-card:nth-child(3) {
+    transition-delay: .34s;
+}
+
+.packages-section.is-visible .package-card:nth-child(4) {
+    transition-delay: .46s;
+}
+
+/* HOVER */
+
+.package-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.42);
+}
+
+/* CARD TOP LINE */
+
+.package-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+
+    color: #888;
+    font-size: 9px;
+    letter-spacing: 1.7px;
+}
+
+.package-label {
+    color: #ddd;
+}
+
+/* PACKAGE NAME AND PRICE */
+
+.package-info {
+    margin-top: 23px;
+}
+
+.package-info h3 {
+    margin: 0 0 7px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 31px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.package-price {
+    margin: 0;
+    color: #aaa;
+    font-size: 15px;
+    letter-spacing: .5px;
+}
+
+/* PACKAGE DETAILS */
+
+.package-details {
+    margin-top: 17px;
+}
+
+.package-details p {
+    margin: 0 0 8px;
+    color: #aaa;
+    font-size: 11px;
+    letter-spacing: .4px;
+    line-height: 1.5;
+}
+
+/* BOOKING LINK */
+
+.package-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: auto;
+    padding-top: 20px;
+
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 9px;
+    letter-spacing: 1.6px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    transition: color .3s ease;
+}
+
+.package-link span {
+    font-size: 17px;
+    transition: transform .3s ease;
+}
+
+.package-link:hover {
+    color: #aaa;
+}
+
+.package-link:hover span {
+    transform: translate(4px, -4px);
+}
+
+/* PREMIUM — MUTED GOLD */
+
+.package-premium {
+    background: rgba(164, 133, 78, 0.10);
+    border-color: rgba(190, 160, 105, 0.55);
+}
+
+.package-premium .package-top {
+    border-color: rgba(190, 160, 105, 0.35);
+    color: #bba77f;
+}
+
+.package-premium .package-label,
+.package-premium .package-price {
+    color: #c4ad7b;
+}
+
+.package-premium .package-details p {
+    color: #c0b49b;
+}
+
+.package-premium .package-link {
+    color: #d2bd91;
+    border-color: rgba(190, 160, 105, 0.35);
+}
+
+.package-premium:hover {
+    background: rgba(164, 133, 78, 0.16);
+    border-color: #c4ad7b;
+}
+
+/* CUSTOM CARD */
+
+.package-custom .package-price {
+    font-size: 13px;
+    letter-spacing: 1.3px;
+}
+
+/* CLOSING MESSAGE */
+
+.packages-ending {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.packages-ending > p {
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.packages-ending h3 {
+    margin: 20px 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(40px, 6vw, 70px);
+    font-weight: 400;
+    line-height: .95;
+}
+
+.packages-ending h3 em {
+    color: #999;
+    font-weight: 400;
+}
+
+.packages-ending > a {
+    display: inline-block;
+    margin-top: 15px;
+    padding-bottom: 8px;
+
+    color: #eee;
+    border-bottom: 1px solid #888;
+
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2px;
+    transition: color .3s ease;
+}
+
+.packages-ending > a:hover {
+    color: #aaa;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+    .packages-section {
+        padding: 100px 6%;
+    }
+
+    .packages-grid {
+        gap: 14px;
+    }
+
+    .package-card {
+        padding: 23px;
+        min-height: 275px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .packages-section {
+        padding: 85px 6%;
+    }
+
+    .packages-intro {
+        margin-bottom: 42px;
+    }
+
+    .packages-intro h2 {
+        font-size: 57px;
+        letter-spacing: -2px;
+    }
+
+    .packages-description {
+        font-size: 12px;
+    }
+
+    .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .package-card {
+        min-height: 260px;
+        padding: 23px 22px;
+    }
+
+    .package-info h3 {
+        font-size: 29px;
+    }
+
+    .packages-ending {
+        margin-top: 75px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+    .package-card {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ==========================================
+   SOCIAL CONTACT PANEL
+========================================== */
+
+.social-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(14px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+}
+
+.social-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.social-panel {
+    position: relative;
+    width: 100%;
+    max-width: 470px;
+
+    padding: 55px 42px;
+    background: #101010;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    transform: translateY(25px);
+    transition: transform .45s ease;
+}
+
+.social-overlay.active .social-panel {
+    transform: translateY(0);
+}
+
+/* CLOSE BUTTON */
+
+.social-close {
+    position: absolute;
+    top: 17px;
+    right: 22px;
+
+    width: 35px;
+    height: 35px;
+
+    background: transparent;
+    border: none;
+    color: #fff;
+
+    font-size: 29px;
+    font-weight: 300;
+    cursor: pointer;
+
+    transition: transform .3s ease, color .3s ease;
+}
+
+.social-close:hover {
+    transform: rotate(90deg);
+    color: #999;
+}
+
+/* PANEL TEXT */
+
+.social-eyebrow {
+    color: #888;
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
+}
+
+.social-panel h2 {
+    color: #f2f2f0;
+    font-size: clamp(29px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 38px;
+}
+
+/* SOCIAL LINKS */
+
+.social-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 23px 0;
+
+    color: #eee;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+    transition:
+        color .3s ease,
+        padding .3s ease;
+}
+
+.social-option:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.social-option span:last-child {
+    font-size: 20px;
+    transition: transform .3s ease;
+}
+
+.social-option:hover {
+    color: #999;
+    padding-left: 10px;
+}
+
+.social-option:hover span:last-child {
+    transform: translate(4px, -4px);
+}
+
+/* FOOTER */
+
+.social-footer {
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 1.7;
+    margin-top: 30px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .social-panel {
+        padding: 50px 25px;
+    }
+
+    .social-panel h2 {
+        font-size: 31px;
+    }
+
+    .social-option {
+        padding: 21px 0;
+        font-size: 10px;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    .social-overlay,
+    .social-panel,
+    .social-option,
+    .social-close,
+    .social-option span:last-child {
+        transition: none;
+    }
+}
+
+/* =====================================
+   LINUS PHOTOGRAPHY — FOOTER VISIBILITY
+===================================== */
+
+.site-footer {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    height: auto;
+    padding: 35px 6%;
+    overflow: visible;
+    visibility: visible;
+    opacity: 1;
+    z-index: 5;
+    background: #080808;
+    color: #ffffff;
+}
+
+.site-footer .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.site-footer p {
+    margin: 0;
+    color: #bdbdbd;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.site-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    transition: opacity 0.3s ease;
+}
+
+.site-footer a:hover {
+    opacity: 0.6;
+}
+
+.site-footer .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 30px 20px;
+    }
+
+    .site-footer .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

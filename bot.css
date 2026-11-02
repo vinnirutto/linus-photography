@@ -1,0 +1,962 @@
+
+/* =====================================================
+   PACE BOT — CINEMATIC CHAT INTERFACE
+   LINUS® PHOTOGRAPHY
+===================================================== */
+
+:root {
+    --pace-black: #080808;
+    --pace-panel: #101010;
+    --pace-panel-light: #181818;
+    --pace-white: #f4f4f0;
+    --pace-muted: #858585;
+    --pace-border: rgba(255, 255, 255, 0.13);
+}
+
+/* ================= LENS LAUNCHER ================= */
+
+.pace-launcher {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 9990;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+
+    background: #090909;
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.pace-launcher svg {
+    width: 34px;
+    height: 34px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+
+    transition: transform 0.6s ease;
+}
+
+.pace-launcher:hover {
+    transform: scale(1.08);
+    background: #f1f1ed;
+    color: #080808;
+    border-color: white;
+    box-shadow: 0 0 25px rgba(255,255,255,0.13);
+}
+
+.pace-launcher:hover svg {
+    transform: rotate(45deg);
+}
+
+.pace-launcher-label {
+    position: absolute;
+    right: 74px;
+
+    white-space: nowrap;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+
+    color: white;
+
+    opacity: 0;
+    transform: translateX(8px);
+
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+.pace-launcher:hover .pace-launcher-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ================= GREETING POPUP ================= */
+
+.pace-greeting {
+    position: fixed;
+    right: 30px;
+    bottom: 108px;
+
+    z-index: 9989;
+
+    max-width: 260px;
+
+    padding: 15px 38px 15px 17px;
+
+    background: #f1f1ed;
+    color: #111;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    transition: 0.4s ease;
+}
+
+.pace-greeting.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.pace-greeting::after {
+    content: "";
+    position: absolute;
+
+    right: 23px;
+    bottom: -7px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #f1f1ed;
+    transform: rotate(45deg);
+}
+
+.pace-greeting button {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+
+    border: none;
+    background: none;
+
+    color: #111;
+    font-size: 19px;
+
+    cursor: pointer;
+}
+
+/* ================= CHAT WINDOW ================= */
+
+.pace-chat {
+    position: fixed;
+
+    right: 30px;
+    bottom: 105px;
+
+    z-index: 9991;
+
+    width: 370px;
+    height: 570px;
+
+    max-height: calc(100dvh - 130px);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--pace-black);
+    color: var(--pace-white);
+
+    border: 1px solid var(--pace-border);
+    border-radius: 8px;
+
+    box-shadow: 0 25px 90px rgba(0,0,0,0.65);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(18px) scale(0.97);
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        transform 0.35s ease;
+}
+
+.pace-chat.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateY(0) scale(1);
+}
+
+/* ================= HEADER ================= */
+
+.pace-header {
+    min-height: 76px;
+
+    padding: 14px 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #0d0d0d;
+
+    border-bottom: 1px solid var(--pace-border);
+}
+
+.pace-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pace-avatar {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #efefeb;
+    border-radius: 50%;
+}
+
+.pace-avatar svg {
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+    stroke: #090909;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.pace-identity-text h3 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.pace-identity-text span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--pace-muted);
+
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+.pace-header-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.pace-header-actions button {
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--pace-border);
+    border-radius: 50%;
+
+    background: transparent;
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.pace-header-actions button:hover {
+    background: white;
+    color: black;
+}
+
+/* ================= MESSAGE AREA ================= */
+
+.pace-messages {
+    flex: 1;
+
+    padding: 22px 17px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+}
+
+.pace-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.pace-messages::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+.pace-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+
+    max-width: 95%;
+
+    animation: paceMessageIn 0.35s ease both;
+}
+
+@keyframes paceMessageIn {
+    from {
+        opacity: 0;
+        transform: translateY(9px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pace-message-avatar {
+    flex-shrink: 0;
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaeae6;
+    border-radius: 50%;
+}
+
+.pace-message-avatar svg {
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+    stroke: #111;
+    stroke-width: 4;
+}
+
+.pace-message-content {
+    min-width: 0;
+}
+
+.pace-sender {
+    display: block;
+
+    margin: 1px 0 7px;
+
+    color: #999;
+
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.pace-bubble {
+    padding: 12px 14px;
+
+    background: var(--pace-panel-light);
+
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px 9px 9px 9px;
+
+    color: #e9e9e5;
+
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.user-message {
+    align-self: flex-end;
+    justify-content: flex-end;
+}
+
+.user-message .pace-message-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-message .pace-sender {
+    text-align: right;
+}
+
+.user-message .pace-bubble {
+    background: #e9e9e5;
+    color: #111;
+
+    border-radius: 9px 2px 9px 9px;
+}
+
+/* ================= QUICK CHOICES ================= */
+
+.pace-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding-left: 36px;
+
+    animation: paceMessageIn 0.5s ease both;
+}
+
+.pace-choice {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,0.17);
+    border-radius: 3px;
+
+    color: #e9e9e5;
+
+    font-family: inherit;
+    font-size: 10px;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.pace-choice span {
+    color: #999;
+    font-size: 13px;
+}
+
+.pace-choice:hover {
+    background: #eeeeea;
+    color: #080808;
+    border-color: #eeeeea;
+}
+
+.pace-choice:hover span {
+    color: #080808;
+}
+
+/* ================= TYPING INDICATOR ================= */
+
+.pace-typing {
+    padding: 10px 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pace-typing[hidden],
+.pace-contact-shortcuts[hidden] {
+    display: none;
+}
+
+.pace-typing > span {
+    width: 5px;
+    height: 5px;
+
+    background: #cfcfc9;
+    border-radius: 50%;
+
+    animation: paceTyping 1s infinite ease-in-out;
+}
+
+.pace-typing > span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.pace-typing > span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.pace-typing small {
+    margin-left: 7px;
+
+    color: #858585;
+
+    font-size: 9px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes paceTyping {
+    0%, 60%, 100% {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateY(-4px);
+    }
+}
+
+/* ================= CONTACT SHORTCUTS ================= */
+
+.pace-contact-shortcuts {
+    padding: 10px 16px;
+
+    display: flex;
+    gap: 9px;
+
+    border-top: 1px solid var(--pace-border);
+}
+
+.pace-contact-shortcuts a {
+    flex: 1;
+
+    padding: 11px 7px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    color: white;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+.pace-contact-shortcuts a:hover {
+    background: white;
+    color: black;
+}
+
+/* ================= INPUT AREA ================= */
+
+.pace-input-area {
+    min-height: 61px;
+
+    padding: 10px 13px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    background: #101010;
+
+    border-top: 1px solid var(--pace-border);
+}
+
+.pace-input-area input {
+    flex: 1;
+    min-width: 0;
+
+    padding: 12px 13px;
+
+    background: #191919;
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+
+    outline: none;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.pace-input-area input::placeholder {
+    color: #777;
+}
+
+.pace-input-area input:focus {
+    border-color: rgba(255,255,255,0.45);
+}
+
+.pace-input-area button {
+    width: 39px;
+    height: 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eeeeea;
+    border: none;
+    border-radius: 3px;
+
+    color: #090909;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.pace-input-area button:hover {
+    transform: translateY(-2px);
+    background: white;
+}
+
+.pace-input-area button svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ================= FOOTER ================= */
+
+.pace-footer {
+    padding: 10px;
+
+    background: #090909;
+
+    color: #666;
+
+    font-size: 7px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .pace-launcher {
+        right: 17px;
+        bottom: 19px;
+
+        width: 55px;
+        height: 55px;
+    }
+
+    .pace-launcher svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .pace-launcher-label {
+        display: none;
+    }
+
+    .pace-greeting {
+        right: 17px;
+        bottom: 84px;
+
+        max-width: 235px;
+    }
+
+    .pace-chat {
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        height: 100%;
+        max-height: 100dvh;
+
+        border: none;
+        border-radius: 0;
+
+        transform: translateY(20px);
+    }
+
+    .pace-chat.active {
+        transform: translateY(0);
+    }
+
+    .pace-header {
+        min-height: 70px;
+        padding-top: max(13px, env(safe-area-inset-top));
+    }
+
+    .pace-messages {
+        padding: 20px 15px;
+    }
+
+    .pace-input-area {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pace-chat,
+    .pace-launcher,
+    .pace-greeting,
+    .pace-message,
+    .pace-typing > span {
+        animation: none !important;
+        transition: none !important;
+    }
+
+}
+/* =========================================
+   PACE BOT — FULL SCREEN EXPERIENCE
+========================================= */
+
+.pace-chat {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease,
+                visibility 0.35s ease;
+}
+
+.pace-chat.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Header */
+.pace-header {
+    flex-shrink: 0;
+    padding: 22px 5%;
+}
+
+/* Conversation area */
+.pace-messages {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px 5%;
+    overflow-y: auto;
+}
+
+/* Input stays at the bottom */
+.pace-input-area {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 20px 5%;
+}
+
+/* Footer */
+.pace-footer {
+    flex-shrink: 0;
+}
+
+/* Hide floating launcher while chat is open */
+body.pace-chat-open .pace-launcher,
+body.pace-chat-open .pace-greeting {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .pace-header {
+        padding: 16px 18px;
+    }
+
+    .pace-messages {
+        padding: 25px 18px;
+    }
+
+    .pace-input-area {
+        padding: 14px 18px;
+    }
+}
+
+/* =========================================
+   PACE BOT — CLEAR, READABLE TYPOGRAPHY
+========================================= */
+
+.pace-chat {
+    font-family: "Arial", "Helvetica Neue", sans-serif;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+.pace-chat * {
+    font-family: inherit;
+}
+
+/* Header identity */
+.pace-header h2,
+.pace-header h3,
+.pace-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Messages */
+.pace-bubble {
+    font-size: 15px;
+    line-height: 1.75;
+    font-weight: 400;
+    color: #f5f5f5;
+    white-space: pre-line;
+}
+
+/* Bot sender label */
+.pace-sender {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: #c5c5c5;
+}
+
+/* Suggested question buttons */
+.pace-choice {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+/* Input field */
+.pace-input-area input,
+#paceInput {
+    font-family: "Arial", "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+#paceInput::placeholder {
+    color: #a6a6a6;
+    opacity: 1;
+}
+
+/* Header buttons */
+.pace-header button {
+    font-size: 14px;
+}
+
+/* Contact links */
+.pace-contact-shortcuts a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Footer */
+.pace-footer {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: #bdbdbd;
+}
+
+/* Mobile readability */
+@media (max-width: 600px) {
+    .pace-bubble {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .pace-choice {
+        font-size: 14px;
+    }
+
+    #paceInput {
+        font-size: 16px;
+    }
+}
+/* ================= PACE BOT GREETING ================= */
+
+.pace-greeting {
+    position: fixed;
+    right: 30px;
+    bottom: 105px;
+    z-index: 9998;
+
+    max-width: 270px;
+    padding: 16px 42px 16px 18px;
+
+    background: #171717;
+    color: #fff;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.6;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    transition: opacity .35s ease,
+                transform .35s ease,
+                visibility .35s ease;
+}
+
+.pace-greeting.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.pace-greeting button {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .pace-greeting {
+        right: 20px;
+        bottom: 95px;
+        max-width: 245px;
+    }
+}

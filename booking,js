@@ -1,0 +1,427 @@
+```javascript
+/* =========================================================
+   LINUS PHOTOGRAPHY — BOOKING SYSTEM
+   Running Photography + Custom Photography
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("bookingForm");
+
+    if (!form) return;
+
+    // ==================== FORM ELEMENTS ====================
+
+    const dateInput = document.getElementById("date");
+    const visionInput = document.getElementById("vision");
+    const characterCount = document.getElementById("characterCount");
+    const formStatus = document.getElementById("formStatus");
+    const submitButton = form.querySelector(".submit-button");
+
+    const serviceType = document.getElementById("serviceType");
+    const runningOptions = document.getElementById("runningOptions");
+    const sportInput = document.getElementById("sport");
+
+    const customTask = document.getElementById("customTask");
+    const customTaskGroup = document.getElementById("customTaskGroup");
+
+    const currencyInput = document.getElementById("currency");
+    const packageInput = document.getElementById("package");
+    const packagePrice = document.getElementById("packagePrice");
+
+    // ==================== CONTACT DETAILS ====================
+
+    const managerEmail = "vinnirutto22@gmail.com";
+    const managerWhatsApp = "254768810218";
+
+    // ==================== CURRENCY SETTINGS ====================
+
+    /*
+     * Package prices are stored in USD.
+     *
+     * These are example exchange rates, not live rates.
+     * Update them before publishing the website.
+     */
+
+    const exchangeRates = {
+        USD: 1,
+        KES: 130,
+        EUR: 0.92
+    };
+
+    const currencyLocales = {
+        USD: "en-US",
+        KES: "en-KE",
+        EUR: "de-DE"
+    };
+
+    // ==================== PACKAGES ====================
+
+    const packages = [
+        {
+            id: "start",
+            name: "The Start",
+            usd: 15,
+            description: "A focused running photography session."
+        },
+        {
+            id: "grind",
+            name: "The Grind",
+            usd: 30,
+            description: "Extended training or running coverage."
+        },
+        {
+            id: "legacy",
+            name: "The Legacy",
+            usd: 75,
+            description: "Premium running or event coverage."
+        },
+        {
+            id: "custom",
+            name: "Custom Session",
+            usd: null,
+            description: "A tailored photography package quoted individually."
+        }
+    ];
+
+    // ==================== LOCAL DATE ====================
+
+    function getLocalDate() {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
+    // Prevent selecting a date in the past.
+    dateInput.min = getLocalDate();
+
+    // ==================== CURRENCY FORMATTING ====================
+
+    function formatMoney(usdAmount) {
+        const currency = currencyInput.value;
+        const convertedAmount = usdAmount * exchangeRates[currency];
+
+        return new Intl.NumberFormat(
+            currencyLocales[currency],
+            {
+                style: "currency",
+                currency: currency,
+                maximumFractionDigits: currency === "KES" ? 0 : 2
+            }
+        ).format(convertedAmount);
+    }
+
+    // ==================== PACKAGE SELECTOR ====================
+
+    function populatePackages() {
+        const previousPackage = packageInput.value;
+
+        packageInput.replaceChildren();
+
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Choose a package";
+
+        packageInput.appendChild(placeholder);
+
+        packages.forEach((item) => {
+            const option = document.createElement("option");
+
+            option.value = item.id;
+
+            if (item.usd === null) {
+                option.textContent =
+                    `${item.name} — Quote on request`;
+            } else {
+                option.textContent =
+                    `${item.name} — ${formatMoney(item.usd)}`;
+            }
+
+            packageInput.appendChild(option);
+        });
+
+        // Preserve the existing selection after changing currency.
+        if (packages.some((item) => item.id === previousPackage)) {
+            packageInput.value = previousPackage;
+        }
+
+        updatePackagePrice();
+    }
+
+    function updatePackagePrice() {
+        const selected = packages.find(
+            (item) => item.id === packageInput.value
+        );
+
+        if (!selected) {
+            packagePrice.textContent =
+                "Choose a package to view its rate.";
+
+            return;
+        }
+
+        if (selected.usd === null) {
+            packagePrice.textContent =
+                "Custom quote: the final price depends on your requirements.";
+
+            return;
+        }
+
+        packagePrice.textContent =
+            `${selected.name}: ${formatMoney(selected.usd)}`;
+    }
+
+    // ==================== SERVICE SWITCHING ====================
+
+    function updateServiceFields() {
+        const isCustom = serviceType.value === "custom";
+
+        runningOptions.hidden = isCustom;
+        customTaskGroup.hidden = !isCustom;
+
+        // Running discipline is required only for running photography.
+        sportInput.required = !isCustom;
+        customTask.required = isCustom;
+
+        if (isCustom) {
+            sportInput.value = "";
+
+            // Automatically select the custom quote package.
+            packageInput.value = "custom";
+        } else {
+            customTask.value = "";
+
+            if (packageInput.value === "custom") {
+                packageInput.value = "";
+            }
+        }
+
+        updatePackagePrice();
+    }
+
+    // ==================== CHARACTER COUNTER ====================
+
+    function updateCharacterCount() {
+        characterCount.textContent = visionInput.value.length;
+    }
+
+    visionInput.addEventListener("input", updateCharacterCount);
+
+    updateCharacterCount();
+
+    // ==================== EVENT LISTENERS ====================
+
+    currencyInput.addEventListener("change", populatePackages);
+
+    packageInput.addEventListener("change", updatePackagePrice);
+
+    serviceType.addEventListener("change", updateServiceFields);
+
+    dateInput.addEventListener("change", () => {
+        if (
+            dateInput.value &&
+            dateInput.value < getLocalDate()
+        ) {
+            formStatus.textContent =
+                "Please choose today or a future date.";
+        } else {
+            formStatus.textContent = "";
+        }
+    });
+
+    // Initialize the page.
+    populatePackages();
+    updateServiceFields();
+
+    // ==================== BOOKING SUBMISSION ====================
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Use native HTML validation.
+        if (!form.reportValidity()) {
+            return;
+        }
+
+        // Check the selected date again before preparing the request.
+        if (dateInput.value < getLocalDate()) {
+            formStatus.textContent =
+                "Please choose today or a future date.";
+
+            dateInput.focus();
+
+            return;
+        }
+
+        const values = new FormData(form);
+
+        const value = (key) =>
+            String(values.get(key) || "").trim();
+
+        // ==================== CLIENT DETAILS ====================
+
+        const fullName = value("fullName");
+        const email = value("email");
+        const phone = value("phone");
+
+        // ==================== SERVICE DETAILS ====================
+
+        const isCustom = value("serviceType") === "custom";
+
+        const selectedSport = isCustom
+            ? "Custom photography request"
+            : value("sport");
+
+        const customDescription = value("customTask");
+
+        // ==================== SESSION DETAILS ====================
+
+        const selectedPackageId = value("package");
+
+        const selectedDate = value("date");
+        const selectedTime = value("time");
+        const location = value("location");
+        const style = value("style");
+        const vision = value("vision");
+
+        const contactMethod = value("contactMethod");
+        const selectedCurrency = currencyInput.value;
+
+        // Find the selected package.
+        const selectedPackage = packages.find(
+            (item) => item.id === selectedPackageId
+        );
+
+        if (!selectedPackage) {
+            formStatus.textContent =
+                "Please select a photography package.";
+
+            packageInput.focus();
+
+            return;
+        }
+
+        // ==================== FORMAT DATE ====================
+
+        const [year, month, day] = selectedDate
+            .split("-")
+            .map(Number);
+
+        const dateObject = new Date(year, month - 1, day, 12);
+
+        const formattedDate = dateObject.toLocaleDateString(
+            "en-KE",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+        // ==================== FORMAT PRICE ====================
+
+        const displayedPrice = selectedPackage.usd === null
+            ? "Custom quote required"
+            : formatMoney(selectedPackage.usd);
+
+        // ==================== BUILD MESSAGE ====================
+
+        const messageLines = [
+            "LINUS PHOTOGRAPHY",
+            "PHOTOGRAPHY BOOKING REQUEST",
+            "",
+            "Hello, I would like to enquire about booking a photography session.",
+            "",
+            "CLIENT DETAILS",
+            `Full name: ${fullName}`,
+            `Email: ${email}`,
+            `Phone: ${phone || "Not provided"}`,
+            "",
+            "SERVICE DETAILS",
+            `Service: ${isCustom ? "Custom Photography" : "Running Photography"}`,
+            `Running discipline: ${selectedSport}`
+        ];
+
+        if (isCustom) {
+            messageLines.push(
+                `Custom photography request: ${customDescription}`
+            );
+        }
+
+        messageLines.push(
+            "",
+            "SESSION DETAILS",
+            `Package: ${selectedPackage.name}`,
+            `Displayed rate: ${displayedPrice}`,
+            `Currency: ${selectedCurrency}`,
+            `Preferred date: ${formattedDate}`,
+            `Preferred time: ${selectedTime || "Flexible"}`,
+            `Location: ${location}`,
+            `Preferred coverage: ${style || "Not specified"}`,
+            "",
+            "ADDITIONAL INFORMATION",
+            vision || "No additional details provided.",
+            "",
+            "Please confirm availability, final pricing, and the next steps.",
+            "",
+            "Thank you,",
+            fullName
+        );
+
+        const message = messageLines.join("\n");
+        const encodedMessage = encodeURIComponent(message);
+
+        // ==================== OPEN CONTACT METHOD ====================
+
+        submitButton.disabled = true;
+
+        formStatus.textContent =
+            "Preparing your booking request...";
+
+        if (contactMethod === "whatsapp") {
+            const whatsappURL =
+                `https://wa.me/${managerWhatsApp}?text=${encodedMessage}`;
+
+            /*
+             * Open a new tab directly from the submit interaction
+             * to reduce the chance of popup blocking.
+             */
+            const whatsappWindow = window.open(
+                whatsappURL,
+                "_blank"
+            );
+
+            if (whatsappWindow) {
+                whatsappWindow.opener = null;
+
+                formStatus.textContent =
+                    "WhatsApp opened. Review your request and press Send to submit it.";
+            } else {
+                formStatus.textContent =
+                    "Your browser may have blocked WhatsApp. Allow pop-ups and try again, or use the WhatsApp contact link on the page.";
+            }
+
+        } else {
+            const subject = encodeURIComponent(
+                `Photography Booking Request — ${fullName}`
+            );
+
+            const emailURL =
+                `mailto:${managerEmail}` +
+                `?subject=${subject}` +
+                `&body=${encodedMessage}`;
+
+            formStatus.textContent =
+                "Your email draft is being opened. Press Send in your email app to submit the request.";
+
+            window.location.href = emailURL;
+        }
+
+        submitButton.disabled = false;
+    });
+
+});
