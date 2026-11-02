@@ -13,6 +13,126 @@
 
    <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="bot.css">
+
+<style>
+/* MOBILE NAVIGATION — desktop navigation remains unchanged */
+.mobile-nav-toggle,
+.mobile-nav-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        position: relative;
+        z-index: 10001;
+    }
+
+    .site-header .navigation {
+        display: none !important;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 10003;
+        width: 46px;
+        height: 46px;
+        padding: 12px 10px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        border: 1px solid rgba(255,255,255,.45);
+        background: rgba(0,0,0,.72);
+        cursor: pointer;
+    }
+
+    .mobile-nav-toggle span {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: #fff;
+        transition: transform .25s ease, opacity .25s ease;
+    }
+
+    .mobile-nav-overlay {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 10002;
+        padding: 90px 9vw 35px;
+        flex-direction: column;
+        justify-content: center;
+        background: #080808;
+        color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity .3s ease, visibility .3s ease,
+                    transform .3s ease;
+    }
+
+    .mobile-nav-overlay.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .mobile-nav-close {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(255,255,255,.4);
+        background: transparent;
+        color: #fff;
+        font-size: 30px;
+        font-weight: 300;
+        cursor: pointer;
+    }
+
+    .mobile-nav-eyebrow,
+    .mobile-nav-footer {
+        color: rgba(255,255,255,.55);
+        font-size: 10px;
+        letter-spacing: .18em;
+    }
+
+    .mobile-navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        margin: 24px 0;
+    }
+
+    .mobile-navigation a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,.15);
+        color: #fff;
+        font-family: inherit;
+        font-size: clamp(22px, 6vw, 34px);
+        letter-spacing: .04em;
+        text-decoration: none;
+    }
+
+    .mobile-navigation a span {
+        font-size: 16px;
+    }
+
+    body.mobile-nav-open {
+        overflow: hidden;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -21,10 +141,14 @@
 
     <header class="site-header">
 
-        <a href="#home" class="logo">
-            <img src="images/logo.jpeg"
-                 alt="LINUS Photography">
-        </a>
+        <!-- MOBILE NAVIGATION TOGGLE -->
+        <button class="mobile-nav-toggle" id="mobileNavToggle"
+                type="button" aria-label="Open navigation"
+                aria-controls="mobileNavOverlay" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
         <nav class="navigation">
 
@@ -43,6 +167,26 @@
         </nav>
 
     </header>
+
+    <!-- MOBILE FULL-SCREEN NAVIGATION -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"
+         aria-hidden="true">
+        <button class="mobile-nav-close" id="mobileNavClose"
+                type="button" aria-label="Close navigation">&times;</button>
+
+        <p class="mobile-nav-eyebrow">LINUS® PHOTOGRAPHY / EXPLORE</p>
+
+        <nav class="mobile-navigation" aria-label="Mobile navigation">
+            <a href="#home">HOME</a>
+            <a href="#story">OUR STORY</a>
+            <a href="#work">GALLERY</a>
+            <a href="#experience">THE EXPERIENCE</a>
+            <a href="#packages">PACKAGES</a>
+            <a href="#packages">BOOK A SHOOT <span>↗</span></a>
+        </nav>
+
+        <p class="mobile-nav-footer">BORN TO MOVE.</p>
+    </div>
 
 
     <!-- HERO SECTION -->
@@ -695,6 +839,47 @@
 
 </section>
 <!-- END PACE BOT -->
+
+<script>
+/* MOBILE NAVIGATION */
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("mobileNavToggle");
+    const overlay = document.getElementById("mobileNavOverlay");
+    const close = document.getElementById("mobileNavClose");
+    const links = overlay ? overlay.querySelectorAll("a") : [];
+
+    if (!toggle || !overlay || !close) return;
+
+    function openMenu() {
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close navigation");
+        document.body.classList.add("mobile-nav-open");
+    }
+
+    function closeMenu() {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open navigation");
+        document.body.classList.remove("mobile-nav-open");
+    }
+
+    toggle.addEventListener("click", function () {
+        overlay.classList.contains("is-open") ? closeMenu() : openMenu();
+    });
+
+    close.addEventListener("click", closeMenu);
+    links.forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeMenu();
+    });
+});
+</script>
 
 <script src="script.js"></script>
 <script src="bot.js"></script>
